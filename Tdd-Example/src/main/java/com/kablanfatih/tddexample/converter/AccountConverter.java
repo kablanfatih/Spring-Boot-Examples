@@ -2,9 +2,9 @@ package com.kablanfatih.tddexample.converter;
 
 import com.kablanfatih.tddexample.dto.AccountDto;
 import com.kablanfatih.tddexample.entitiy.Account;
+import org.springframework.stereotype.Component;
 
-import java.util.function.Function;
-
+@Component
 public class AccountConverter extends Converter<AccountDto, Account> {
 
     public AccountConverter() {
@@ -14,11 +14,11 @@ public class AccountConverter extends Converter<AccountDto, Account> {
     private static AccountDto convertToDto(Account account) {
         return new AccountDto(account.getId(), account.getName(),
                 account.getSurname(), account.getEmail(), account.getBirth_date(), account.getPassword(),
-                account.getStatus(), account.getCreatedAt());
+                account.getStatus());
     }
 
     private static Account convertToEntity(AccountDto dto) {
         return new Account(dto.getId(), dto.getName(), dto.getSurname(), dto.getEmail(),
-                dto.getBirth_date(), dto.getPassword(), dto.getStatus(), dto.getCreatedAt());
+                dto.getBirth_date(), dto.getPassword(), dto.getStatus());
     }
 }
