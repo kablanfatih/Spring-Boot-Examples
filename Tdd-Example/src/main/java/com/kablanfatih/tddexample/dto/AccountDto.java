@@ -25,7 +25,4 @@ public class AccountDto {
     private String password;
 
     private AccountStatus status;
-
-    private Date createdAt;
-
 }

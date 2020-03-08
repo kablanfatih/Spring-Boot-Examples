@@ -1,9 +1,7 @@
 package com.kablanfatih.tddexample.entitiy;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,13 +9,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
+@Table(name = "accounts")
+@ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account implements Serializable {
+public class Account extends BaseEntityModel implements Serializable{
 
     @Id
     @Getter
+    @Setter
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id = UUID.randomUUID().toString();
@@ -47,8 +49,4 @@ public class Account implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
     private AccountStatus status;
-
-    @Column(name = "created_at")
-    private Date createdAt;
-
 }
