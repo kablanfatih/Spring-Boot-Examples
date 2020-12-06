@@ -80,9 +80,8 @@ class AccountServiceImplTest {
         when(accountMock.getId()).thenReturn(String.valueOf(randomUUID));
         when(accountRepository.save(ArgumentMatchers.any(Account.class))).thenReturn(accountMock);
         AccountDto result = accountService.store(accountDto);
-        Account account1 = converter.convertFromDto(result);
-        assertEquals(account1.getName(), accountDto.getName());
-        assertEquals(account1.getId(), String.valueOf(randomUUID));
+        assertEquals(result.getName(), accountDto.getName());
+        assertEquals(result.getId(), String.valueOf(randomUUID));
 
     }
 

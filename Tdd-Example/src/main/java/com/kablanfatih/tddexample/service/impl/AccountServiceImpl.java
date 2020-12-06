@@ -6,6 +6,7 @@ import com.kablanfatih.tddexample.entitiy.Account;
 import com.kablanfatih.tddexample.repository.AccountRepository;
 import com.kablanfatih.tddexample.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository repository;
     private final AccountConverter converter;
+    private final ModelMapper modelMapper;
 
     @Transactional
     public List<AccountDto> index() {
@@ -39,14 +41,14 @@ public class AccountServiceImpl implements AccountService {
         final Account accountDb = repository.save(account);
         account.setId(accountDb.getId());
 
-        return converter.convertFromEntity(accountDb);
+        return accountDto;
     }
 
     @Transactional
     public AccountDto show(String accountId) {
         Account account = repository.findById(accountId)
                 .orElseThrow(IllegalArgumentException::new);
-        return converter.convertFromEntity(account);
+        return modelMapper.map(account,AccountDto.class);
     }
 
     @Transactional
