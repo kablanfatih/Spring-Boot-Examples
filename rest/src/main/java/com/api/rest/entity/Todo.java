@@ -1,10 +1,12 @@
 package com.api.rest.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,21 +16,26 @@ import java.sql.Date;
 @EqualsAndHashCode
 @Getter
 @Setter
-public class Todo{
+public class Todo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "ad", length = 255)
-    private String ad;
+    @Column(name = "name", length = 255)
+    private String name;
 
     @Column(name = "todo", length = 1000)
     private String todo;
 
     @Column(name = "date")
-    private String date;
+    private Date date;
 
-    /*@Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private String status;*/
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
 }
